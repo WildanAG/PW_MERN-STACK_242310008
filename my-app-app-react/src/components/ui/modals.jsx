@@ -1,9 +1,7 @@
-"use client"
-
+"use client";
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { Button } from "@/components/ui/buttons";
-
+import { Button } from "@/components/ui/button";
 const states = {
   setState: null,
   changeState(data) {
@@ -21,7 +19,6 @@ const handleClose = () => {
     open: false,
   });
 };
-
 const Modals = () => {
   const [data, setData] = useState({
     open: false,
@@ -32,18 +29,15 @@ const Modals = () => {
     onClose: handleClose,
     closable: true,
   });
-
   states.setState = setData;
-
   const styles = `
-    .modal-backdrop-dark {
-      opacity: 0.8 !important;
-      background-color: #000;
-    }`;
-
+.modal-backdrop-dark {
+opacity: 0.8 !important;
+background-color: #000;
+}`;
   return (
     <>
-    <style>{styles}</style>
+      <style>{styles}</style>
       <Modal
         show={data.open}
         onHide={data.closable ? data.onClose : undefined}
@@ -80,31 +74,30 @@ const Modals = () => {
         {data.footer && (
           <Modal.Footer>
             {data.closable && (
-                <Button
-                    variant="secondary"
-                    outline
-                    className="px-5"
-                    onClick={() => handleEdit(book)}
-                    title="Edit"
-                >
-                    No
-                </Button>
+              <Button
+                variant="secondary"
+                outline
+                className="px-5"
+                onClick={() => handleEdit(book)}
+                title="Edit"
+              >
+                No
+              </Button>
             )}
             {data.footer}
           </Modal.Footer>
         )}
       </Modal>
-        </>
+    </>
   );
 };
-
 const openModal = ({
   open = true,
   message,
   header,
   size,
   footer,
-  onClose = () => { },
+  onClose = () => {},
   closable = true,
 }) => {
   states.changeState({
@@ -116,12 +109,11 @@ const openModal = ({
     closable,
     onClose: closable
       ? () => {
-        onClose();
-        handleClose();
-      }
+          onClose();
+          handleClose();
+        }
       : undefined,
   });
 };
-
 export default Modals;
 export { openModal };

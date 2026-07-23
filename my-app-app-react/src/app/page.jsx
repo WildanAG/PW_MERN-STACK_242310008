@@ -1,1 +1,1 @@
-export {default} from "@/components/landing-pages/index"
+export { default } from "@/components/landing-pages/index";
