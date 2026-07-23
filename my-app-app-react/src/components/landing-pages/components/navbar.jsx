@@ -1,4 +1,6 @@
+'use client';
 import { Button } from "../../ui/button";
+import Link from "next/link";
 
 export function Navbar() { 
 const menu_nav = [ 
@@ -39,14 +41,18 @@ const menu_nav = [
           </ul> 
  
           <div className="d-flex gap-2"> 
-            <Button className="btn btn-light text-dark"> 
-              <i className="bi bi-box-arrow-in-right me-2"></i> 
-              Sign In 
-            </Button> 
-            <Button className="btn btn-warning"> 
-              <i className="bi bi-person-plus me-2"></i> 
-              Sign Up 
-            </Button> 
+            <Link href="/sign-in">
+              <Button className="btn btn-light text-dark"> 
+                <i className="bi bi-box-arrow-in-right me-2"></i> 
+                Sign In 
+              </Button> 
+            </Link>
+            <Link href="/sign-up">
+              <Button className="btn btn-warning"> 
+                <i className="bi bi-person-plus me-2"></i> 
+                Sign Up 
+              </Button> 
+            </Link>
           </div> 
         </div> 
       </div> 

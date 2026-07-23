@@ -9,6 +9,23 @@ import Form from "./components/form";
 import Tabledata from "./components/tabledata";
 export function MBooks() {
   const [books, setBooks] = useState(ListBooks);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URI}/api/books`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setBooks(response.data.data || response.data);
+      } catch (err) {
+        console.error("Failed to fetch books", err);
+      }
+    };
+
+    if (token) fetchBooks();
+  }, [token]);
+  
   return (
     <div className="container-fluid">
       <Header handleAdd={() => openModal({ message: <Form />, size: "xl"})} />

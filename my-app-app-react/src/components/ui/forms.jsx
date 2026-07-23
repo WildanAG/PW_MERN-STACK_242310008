@@ -28,6 +28,19 @@ const TextInput = ({ title, required, ...props }) => {
     </div>
   );
 };
+const TextInputPassword = ({ title, required, ...props }) => {
+  return (
+    <div className="form-group mb-3">
+      {title && <LableTitle title={title} required={required} />}
+      <input
+        type="password"
+        required={required}
+        className="form-control"
+        {...props}
+      />
+    </div>
+  );
+};
 const TextAreaInput = ({ title, required, ...props }) => {
   return (
     <div className="form-group mb-3">
@@ -91,6 +104,8 @@ export {
   validateInput,
   sanitizeInput,
   TextInput,
+  TextInputPassword,
+  LableTitle,
   TextAreaInput,
   InputCheckbox,
   InputImage,

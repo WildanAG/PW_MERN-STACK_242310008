@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import "./auth.css";
-import { TextInput, TextInputPassword } from "@/components/ui/forms";
+import { TextInput } from "@/components/ui/forms";
+import { TextInputPassword } from "@/components/ui/forms";
 import { withAuthRedirect } from "./withAuthRedirect";
 
 function SignInPage() {
@@ -19,6 +20,23 @@ function SignInPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URI}/api/books`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setBooks(response.data.data || response.data);
+      } catch (err) {
+        console.error("Failed to fetch books", err);
+      }
+    };
+
+    if (token) fetchBooks();
+  }, [token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
